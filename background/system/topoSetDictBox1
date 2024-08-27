@@ -1,0 +1,96 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2012                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+actions
+(
+    {
+        name    bgr0;       // all around bgr
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (-6.5 -1.75 -1.0) ( 3.5  1.75  1.0);  // Bounding box for the background
+        }
+    }
+    {
+        name    vessel;     // all around box1
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (-0.75 -0.4 -0.8) (0.85 0.4 0.5);  // Bounding box for the background
+        }
+    }
+    {
+        name    pendulum;     // all around box2
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (-0.2 -0.25 -0.7) (0.2 0.25 -0.1);  // Bounding box for the background
+        }
+    }
+    
+    {
+        name    box;   //all cells box1
+        type    cellSet;
+        action  new;
+        source  cellToCell;
+        set     vessel;
+    }
+    {
+        name    box;   // hole in mesh
+        type    cellSet;
+        action  subset;
+        source  boxToCell;
+        boxes
+        (
+            (-0.45 -0.125 -0.06) (0.55 0.125 0.36) //box1
+        );
+    }
+    {
+        name    box;
+        type    cellSet;
+        action  invert;
+    }
+    
+    {
+        name    keepBox;   //all cells aleady, no need to add box20, bgr0
+        type    cellSet;
+        action  new;
+        source  cellToCell;
+        set     box;
+    }
+    {
+        name    keepBox;   //all cells
+        type    cellSet;
+        action  add;
+        source  cellToCell;
+        set     pendulum;
+    }
+    {
+        name    keepBox;   //all cells
+        type    cellSet;
+        action  add;
+        source  cellToCell;
+        set     bgr0;
+    }
+);
+
+// ************************************************************************* //

@@ -1,0 +1,92 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2012                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default         Euler;  // More stable for transient simulations
+}
+
+gradSchemes
+{
+    default         Gauss linear;
+    limitedGrad     cellLimited Gauss linear 0.5;  // More conservative limiter for better stability
+}
+
+divSchemes
+{
+    div(rhoPhi,U)   Gauss limitedLinearV 1; // Use limitedLinearV for stability in velocity convection
+    div(U)          Gauss linear;
+    div(phi,alpha)  Gauss interfaceCompression; // For better interface capturing in VOF method
+    div(phirb,alpha) Gauss linear;
+    div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
+
+    div(phi,k)      Gauss upwind;
+    div(phi,epsilon) Gauss upwind;
+    div(phi,omega)  Gauss upwind;
+}
+
+laplacianSchemes
+{
+    default         Gauss linear corrected;
+}
+
+interpolationSchemes
+{
+    default         linear;
+}
+
+snGradSchemes
+{
+    default         corrected;
+}
+
+fluxRequired
+{
+    default         no;
+    p_rgh;
+    pcorr;
+    p;
+    yPsi;
+    alpha.water;
+}
+
+oversetInterpolation
+{
+   method           trackingInverseDistance;
+
+   searchBoxDivisions
+   (
+        (500 500 500)
+        (500 500 500)
+        (500 500 500)
+    );
+
+    holeLayers          6;
+    useLayer            3;
+}
+
+oversetInterpolationSuppressed
+{
+    grad(p_rgh);
+    surfaceIntegrate(phiHbyA);
+}
+
+wallDist
+{
+    method          meshWave;  // Recommended for faster and robust wall distance calculation
+}
+
+// ************************************************************************* //

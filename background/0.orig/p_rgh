@@ -1,0 +1,88 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2306                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      p_rgh;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [1 -1 -2 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    #includeEtc "caseDicts/setConstraintTypes"
+
+    "(overset-1|oversetPatch)"
+    {
+        patchType       overset;
+        type            fixedFluxPressure;
+        value           uniform 0;  // Adjust based on initial conditions if necessary
+    }
+
+    bottom
+    {
+        type            fixedFluxPressure;
+        value           uniform 0;  // Suitable for a solid boundary in contact with the fluid
+    }
+
+    inlet
+    {
+        type            totalPressure;
+        p0              uniform 0;  // Adjust if there's a specific inlet pressure
+        U               U;
+        phi             phi;
+        rho             rho;
+        psi             none;
+        gamma           1;
+        value           uniform 0;  // Initial pressure at the inlet
+    }
+
+    outlet
+    {
+        type            fixedFluxPressure;
+        gradient        uniform 0;  // Assuming a zero pressure gradient across the outlet
+        value           uniform 0;  // Initial pressure at the outlet
+    }
+
+    atmosphere
+    {
+        type            totalPressure;
+        p0              uniform 0;  // Atmospheric pressure set to 0 (relative)
+        U               U;
+        phi             phi;
+        rho             rho;
+        psi             none;
+        gamma           1;
+        value           uniform 0;  // Atmospheric pressure
+    }
+
+    frontAndBack
+    {
+        type            fixedFluxPressure;
+        value           uniform 0;  // Assuming symmetry or negligible pressure change
+    }
+
+    vessel
+    {
+        type            fixedFluxPressure;
+        value           uniform 0;  // Adjust based on initial pressure within the vessel
+    }
+
+    pendulum
+    {
+        type            fixedFluxPressure;
+        value           uniform 0;  // Adjust based on initial pressure within the pendulum
+    }
+}
+
+// ************************************************************************* //

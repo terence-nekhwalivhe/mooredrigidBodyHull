@@ -1,0 +1,23 @@
+#!/bin/sh
+cd "${0%/*}" || exit  # Run from this directory
+. ${WM_PROJECT_DIR:?}/bin/tools/RunFunctions  # Tutorial run functions
+
+# Run blockMesh to create the base mesh
+runApplication blockMesh
+
+# Decompose the domain for parallel execution
+runApplication decomposePar
+
+# Run snappyHexMesh in parallel to create the refined mesh
+runParallel snappyHexMesh -overwrite
+
+# Reconstruct the parallel mesh to a single mesh
+runApplication reconstructParMesh -constant
+
+# Check the mesh quality and validity
+runApplication checkMesh
+
+# Optional: Uncomment if you need to transform the mesh
+# runApplication transformPoints -translate '(0 0 0.0024)'
+
+# End of script

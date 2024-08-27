@@ -1,0 +1,149 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2306                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      snappyHexMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Which of the steps to run
+castellatedMesh true;
+snap            true;
+addLayers       false;
+
+geometry
+{
+    vessel.stl
+    {
+        name vessel;
+        type triSurfaceMesh;
+    }
+
+    BoxRefinement_1
+    {
+        type    box;
+        min     (-0.5 -0.2 -0.09);
+        max     ( 0.6  0.2  0.4);
+    }
+}
+
+// Settings for the castellatedMesh generation.
+castellatedMeshControls
+{
+
+    // Refinement parameters
+    maxLocalCells 150000; // Increased for finer resolution
+    maxGlobalCells 4000000; // Increased for larger global cell limit
+    minRefinementCells 10; // Minimum number of cells to refine
+    maxLoadUnbalance 0.10; 
+    nCellsBetweenLevels 1;
+
+    features
+    (
+        {
+            file "vessel.eMesh" ;
+            level 1 ; // Increased refinement around features
+        }
+    );
+
+    refinementSurfaces
+    {
+        vessel
+        {
+            level (2 3); // Adjusted levels for more detailed refinement
+        }
+    }
+
+    resolveFeatureAngle 20; // More aggressive feature capturing
+
+    refinementRegions
+    {
+        BoxRefinement_1
+        {
+            mode    inside;
+            levels  ((0 3)); // Increased refinement level inside the box
+        }
+    }
+
+    locationInMesh (-0.45 0.1 0.1);
+    allowFreeStandingZoneFaces true;
+}
+
+// Settings for the snapping.
+snapControls
+{
+    nSmoothPatch 5; // Increased for better surface matching
+    tolerance 2.0; // Tighter snapping tolerance
+    nSolveIter 30;
+    nRelaxIter 5;
+    nFeatureSnapIter 20; // Increased for better feature snapping
+    implicitFeatureSnap true;
+    explicitFeatureSnap true;
+    multiRegionFeatureSnap false;
+}
+
+// Settings for the layer addition.
+addLayersControls
+{
+    relativeSizes true;
+    expansionRatio 1.0;
+    finalLayerThickness 0.3;
+    firstLayerThickness 0.3;
+    minThickness 0.25;
+    layers
+    {
+        vessel
+        {
+            nSurfaceLayers 4;
+        }
+    }
+    nGrow 0;
+    featureAngle 60;
+    slipFeatureAngle 30;
+    nRelaxIter 10;
+    nSmoothSurfaceNormals 1;
+    nSmoothNormals 3;
+    nSmoothThickness 10;
+    maxFaceThicknessRatio 0.5;
+    maxThicknessToMedialRatio 0.3;
+    minMedialAxisAngle 90;
+    nBufferCellsNoExtrude 0;
+    nLayerIter 50;
+    nRelaxedIter 20;
+}
+
+// Generic mesh quality settings
+meshQualityControls
+{
+    maxNonOrtho 60; // Tighter control on non-orthogonality
+    maxBoundarySkewness 15; // Reduced for better boundary skewness
+    maxInternalSkewness 3; // Reduced for better internal skewness
+    maxConcave 70; // Reduced for better concave control
+    minVol 1e-13;
+    minTetQuality 1e-9;
+    minArea -1;
+    minTwist 0.05;
+    minDeterminant 0.001;
+    minFaceWeight 0.05;
+    minVolRatio 0.01;
+    minTriangleTwist -1;
+    nSmoothScale 4;
+    errorReduction 0.75;
+    relaxed
+    {
+        maxNonOrtho 65;
+    }
+}
+
+// Advanced
+mergeTolerance 1e-6;
+
+// ************************************************************************* //

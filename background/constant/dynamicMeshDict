@@ -1,0 +1,120 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2212                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      dynamicMeshDict;
+}
+// ************************************************************************* //
+
+dynamicFvMesh       dynamicOversetFvMesh;
+motionSolverLibs    (rigidBodyMeshMotion);
+motionSolver        rigidBodyMotion;
+
+rigidBodyMotionCoeffs
+{
+    report          on;
+
+    solver
+    {
+        type Newmark;
+        //gamma   0.5;     Velocity integration coefficient
+        //beta    0.25;    Position integration coefficient
+    }
+
+    accelerationRelaxation 0.8;
+    accelerationDamping    0.9;
+    nIter   3;
+
+    bodies
+    {
+        vessel
+        {
+            type            rigidBody;
+            parent          root;
+            mass            6;
+            centreOfMass    (0 0 0);
+            inertia         (2.16760026e-03 0 0 1.66010116e-02 0 1.64784005e-02); // Verify these values
+            transform       (1 0 0 0 1 0 0 0 1) (0.0 0.0 -0.03);
+
+            joint
+            {
+                type        composite;
+                joints
+                (
+                    { type Px; }
+                    { type Pz; }
+                    { type Ry; }
+                );
+            }
+
+            patches         (vessel);
+            innerDistance   0.5;
+            outerDistance   2.5;
+
+        }
+
+        pendulum
+        {
+            type            rigidBody;
+            parent          vessel;
+            centreOfMass    (0 0 0);
+            mass            0.5;
+            inertia         (5.45415855e-06 0 0 5.45415855e-06 0 2.02213002e-07); // Verify this value
+            transform       (1 0 0 0 1 0 0 0 1) (0.0 0.0 -0.40);
+
+            joint
+            {
+                type        composite;
+                joints
+                (
+                    { type Px; }
+                    { type Pz; }
+                    { type Ry; }
+                );
+            }
+
+            patches         (pendulum);
+            innerDistance   0.4;
+            outerDistance   1.2;
+
+        }
+    }
+
+    restraints
+    {
+        moorDynR2_pt
+        {
+            type               moorDynR2;
+            body               vessel;
+            couplingMode       "POINT";
+            inputFile          "/home/nkhadi001/OpenFOAM/nkhadi001-2306/foamMooring/tutorial/mooredrigidBodyHull/background/Mooring/lines_v2_point.txt";
+            bodies             (vessel vessel vessel vessel vessel pendulum);
+
+            refAttachmentPt
+            (
+                (-0.37     0.120    -0.02)
+                (-0.37    -0.120    -0.02)
+                ( 0.37     0.120    -0.02)
+                ( 0.37    -0.120    -0.02)
+                ( 0.00     0.000    -0.02)
+
+                ( 0.00     0.000    0.3095)
+            );
+
+            writeMooringVTK    true;
+            vtkPrefix          "mdv2_pt";
+            vtkStartTime       0;
+            outerCorrector     3;
+        }
+    }
+
+}
+// ************************************************************************* //

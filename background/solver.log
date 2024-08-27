@@ -1,0 +1,688 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2306                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _fbf00d6b-20230626 OPENFOAM=2306 version=2306
+Arch   : "LSB;label=32;scalar=64"
+Exec   : overInterDyMFoam -parallel -case /home/nkhadi001/OpenFOAM/nkhadi001-2306/foamMooring/tutorial/mooredrigidBodyHull/background
+Date   : Aug 13 2024
+Time   : 00:03:40
+Host   : srvcnthpc113.uct.ac.za
+PID    : 59303
+I/O    : uncollated
+Case   : /home/nkhadi001/OpenFOAM/nkhadi001-2306/foamMooring/tutorial/mooredrigidBodyHull/background
+nProcs : 5
+Hosts  :
+(
+    (srvcnthpc113.uct.ac.za 5)
+)
+Pstream initialized with:
+    floatTransfer      : false
+    nProcsSimpleSum    : 0
+    nonBlockingExchange: 0 (tuning: 0)
+    exchange algorithm : -1
+    commsType          : nonBlocking
+    polling iterations : 0
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+Selecting dynamicFvMesh dynamicOversetFvMesh
+Selecting motion solver: rigidBodyMotion
+Applying motion to entire mesh
+***  Foam::RBD::restraints::moorDynR2::read
+Creating moorDynR2 using MoorDyn v2.
+
+ Running MoorDyn (v2.0.0, 2023-09-18)
+         MoorDyn v2 has significant ongoing input file changes from v1.
+   Copyright: (C) 2023 National Renewable Energy Laboratory, (C) 2014-2019 Matt Hall
+   This program is released under the  BSD 3-Clause license.
+The filename is /home/nkhadi001/OpenFOAM/nkhadi001-2306/foamMooring/tutorial/mooredrigidBodyHull/background/Mooring/lines_v2_point.txt
+Generated entities:
+	nLineTypes  = 1
+	nRodTypes   = 0
+	nPoints     = 10
+	nBodies     = 0
+	nRods       = 0
+	nLines      = 5
+	nFails      = 0
+	nFreeBodies = 0
+	nFreeRods   = 0
+	nFreePoints  = 0
+	nCpldBodies = 0
+	nCpldRods   = 0
+	nCpldPoints = 6
+Time integrator = 2nd order Runge-Kutta
+No Waves or Currents, or set externally
+	Coupling mode: POINT, expecting nCouplingDof=18
+Multiple bodies specified in moorDynR2 restraint: 6(vessel vessel vessel vessel vessel pendulum)
+ body IDs 6(3 3 3 3 3 6)
+
+Selecting rigidBodySolver Newmark
+Uncoupled 234 faces on coupled patches. (processorPolyPatch, cyclicPolyPatch)
+Uncoupled 270 faces on coupled patches. (processorPolyPatch, cyclicPolyPatch)
+Uncoupled 36 faces on coupled patches. (processorPolyPatch, cyclicPolyPatch)
+trackingInverseDistance : detected 3 mesh regions
+    zone:0 nCells:45122
+    zone:1 nCells:494793
+    zone:2 nCells:36900
+
+PIMPLE: no residual control data found. Calculations will employ 2 corrector loops
+
+Reading field p_rgh
+
+Reading field U
+
+Reading/calculating face flux field phi
+
+Creating cellMask field to block out hole cells
+
+Creating interpolatedCells field 
+
+Reading transportProperties
+
+Selecting incompressible transport model Newtonian
+Selecting incompressible transport model Newtonian
+Selecting turbulence model type RAS
+Selecting RAS turbulence model realizableKE
+RAS
+{
+    RASModel        realizableKE;
+    turbulence      on;
+    printCoeffs     on;
+    A0              4;
+    C2              1.9;
+    sigmak          1;
+    sigmaEps        1.2;
+}
+
+
+Reading g
+
+Reading hRef
+Calculating field g.h
+
+No MRF models present
+
+Creating finite volume options from "system/fvOptions"
+
+Selecting finite volume options type velocityDampingConstraint
+    Source: damp
+    - selecting all cells
+    - selected 576815 cell(s) with volume 53.027679
+Reading/calculating face velocity Uf
+
+Courant Number mean: 0 max: 0
+
+Starting time loop
+
+Courant Number mean: 0 max: 0
+Interface Courant Number mean: 0 max: 0
+deltaT = 1.2000192e-05
+Time = 1.2000192e-05
+
+PIMPLE: iteration 1
+forces forces:
+    rho: rho
+    Not including porosity effects
+
+forces forces:
+    rho: rho
+    Not including porosity effects
+
+Creating mooring system...
+Initializing coupled Point 5 at -0.37, 0.12, -0.05...
+Initializing coupled Point 6 at -0.37, -0.12, -0.05...
+Initializing coupled Point 7 at 0.37, 0.12, -0.05...
+Initializing coupled Point 8 at 0.37, -0.12, -0.05...
+Initializing coupled Point 9 at 0, 0, -0.05...
+Initializing coupled Point 10 at 0, 0, -0.1705...
+  - Line1:
+    ID: 1
+    UnstrLen: 1.75
+    N   : 20
+    d   : 0.0025
+    rho : 10185.916
+    E   : 5907831.5
+    EI  : 0
+    BAin: -0.8
+    Can : 1
+    Cat : 0
+    Cdn : 1.6
+    Cdt : 0.05
+    ww_l: 0.44114141
+Line 1 damping set to 17171.655 Ns = 0.084291162 Pa-s, based on input of -0.8
+Initialized Line 1
+  - Line2:
+    ID: 2
+    UnstrLen: 1.75
+    N   : 20
+    d   : 0.0025
+    rho : 10185.916
+    E   : 5907831.5
+    EI  : 0
+    BAin: -0.8
+    Can : 1
+    Cat : 0
+    Cdn : 1.6
+    Cdt : 0.05
+    ww_l: 0.44114141
+Line 2 damping set to 17171.655 Ns = 0.084291162 Pa-s, based on input of -0.8
+Initialized Line 2
+  - Line3:
+    ID: 3
+    UnstrLen: 1.75
+    N   : 20
+    d   : 0.0025
+    rho : 10185.916
+    E   : 5907831.5
+    EI  : 0
+    BAin: -0.8
+    Can : 1
+    Cat : 0
+    Cdn : 1.6
+    Cdt : 0.05
+    ww_l: 0.44114141
+Line 3 damping set to 17171.655 Ns = 0.084291162 Pa-s, based on input of -0.8
+Initialized Line 3
+  - Line4:
+    ID: 4
+    UnstrLen: 1.75
+    N   : 20
+    d   : 0.0025
+    rho : 10185.916
+    E   : 5907831.5
+    EI  : 0
+    BAin: -0.8
+    Can : 1
+    Cat : 0
+    Cdn : 1.6
+    Cdt : 0.05
+    ww_l: 0.44114141
+Line 4 damping set to 17171.655 Ns = 0.084291162 Pa-s, based on input of -0.8
+Initialized Line 4
+  - Line5:
+    ID: 5
+    UnstrLen: 0.09
+    N   : 4
+    d   : 0.0025
+    rho : 10185.916
+    E   : 5907831.5
+    EI  : 0
+    BAin: -0.8
+    Can : 1
+    Cat : 0
+    Cdn : 1.6
+    Cdt : 0.05
+    ww_l: 0.44114141
+Line 5 damping set to 4415.5683 Ns = 0.02167487 Pa-s, based on input of -0.8
+Initialized Line 5
+Finalizing ICs using dynamic relaxation (5X normal drag)
+Fairlead tensions converged
+Remaining error after 6 s = 0% on line 0
+No Waves or Currents, or set externally
+MoorDyn module initialized!
+ attachmentPt[0] (-0.37 0.12 -0.05) force (-0.050874074 0.064174485 -0.42289699) moment (-0.047538915 -0.15392818 -0.017639671)
+ attachmentPt[1] (-0.37 -0.12 -0.05) force (-0.050874074 -0.064174485 -0.42289699) moment (0.047538915 -0.15392818 0.017639671)
+ attachmentPt[2] (0.37 0.12 -0.05) force (0.72788479 0.55526389 -0.86628789) moment (-0.076191353 0.28413228 0.11810147)
+ attachmentPt[3] (0.37 -0.12 -0.05) force (0.72788479 -0.55526389 -0.86628789) moment (0.076191353 0.28413228 -0.11810147)
+ attachmentPt[4] (0 0 -0.05) force (0 0 -9.8476224) moment (0 0 0)
+ attachmentPt[5] (0 0 -0.1705) force (0 0 9.8079332) moment (0 -0 0)
+forces forces:
+    rho: rho
+    Not including porosity effects
+
+forces forces:
+    rho: rho
+    Not including porosity effects
+
+MoorDyn module restored to t = 0 s
+ attachmentPt[0] (-0.37 0.12 -0.05) force (-0.050876561 0.064177623 -0.42291673) moment (-0.047541126 -0.15393536 -0.017640533)
+ attachmentPt[1] (-0.37 -0.12 -0.05) force (-0.050876561 -0.064177623 -0.42291673) moment (0.047541126 -0.15393536 0.017640533)
+ attachmentPt[2] (0.37 0.12 -0.05) force (0.72790036 0.55527577 -0.86630601) moment (-0.076192933 0.28413821 0.11810399)
+ attachmentPt[3] (0.37 -0.12 -0.05) force (0.72790036 -0.55527577 -0.86630601) moment (0.076192933 0.28413821 -0.11810399)
+ attachmentPt[4] (9.2335161e-12 0 -0.05) force (-6.0314458e-09 0 -9.8476531) moment (0 3.9250075e-10 0)
+ attachmentPt[5] (-8.1553004e-16 0 -0.1705) force (5.3149831e-13 0 9.8078278) moment (0 -8.2621883e-14 -0)
+forces forces:
+    rho: rho
+    Not including porosity effects
+
+forces forces:
+    rho: rho
+    Not including porosity effects
+
+MoorDyn module restored to t = 0 s
+ attachmentPt[0] (-0.37 0.12 -0.05) force (-0.050877009 0.064178187 -0.42292028) moment (-0.047541524 -0.15393665 -0.017640688)
+ attachmentPt[1] (-0.37 -0.12 -0.05) force (-0.050877009 -0.064178187 -0.42292028) moment (0.047541524 -0.15393665 0.017640688)
+ attachmentPt[2] (0.37 0.12 -0.05) force (0.72790316 0.5552779 -0.86630927) moment (-0.076193218 0.28413927 0.11810445)
+ attachmentPt[3] (0.37 -0.12 -0.05) force (0.72790316 -0.5552779 -0.86630927) moment (0.076193218 0.28413927 -0.11810445)
+ attachmentPt[4] (1.0895664e-11 0 -0.05) force (-7.1171967e-09 0 -9.8476586) moment (0 4.6315661e-10 0)
+ attachmentPt[5] (-9.6232453e-16 0 -0.1705) force (6.271662e-13 0 9.8078089) moment (0 -9.7493541e-14 -0)
+Rigid-body motion of the vessel
+    Centre of rotation: (7.0841939e-12 0 -0.03)
+    Orientation: (1 0 2.0553387e-10 0 1 0 -2.0553387e-10 0 1)
+    Linear velocity: (1.1806801e-06 0 3.8223072e-05)
+    Angular velocity: (0 -3.4255097e-05 0)
+Rigid-body motion of the pendulum
+    Centre of rotation: (7.649965e-18 0 -0.45)
+    Orientation: (1 0 3.5649279e-15 0 1 0 -3.5649279e-15 0 1)
+    Linear velocity: (1.2749738e-12 0 0.0001311818)
+    Angular velocity: (0 -5.9414514e-10 0)
+
+ Number of layers : 6
+ Average volumetric ratio : 6(0.018879106 0.016545472 0.014719224 0.013469469 0.014209354 0.012975286)
+ Number of holes cells : 6(265747 260305 254899 251801 245852 230727)
+ Using layer : 3
+
+Overset analysis : nCells : 576815
+    calculated   : 94
+    interpolated : 52 (from local:52  mixed local/remote:0  remote:0)
+    hole         : 564397
+
+Selecting waveModel shallowWaterAbsorption
+Wave model: patch outlet
+    Type : shallowWaterAbsorption
+    Velocity field name : U
+    Phase fraction field name : alpha.water
+    Transformation from local to global system : (1 -0 -0 0 1 0 -0 -0 1)
+    Number of paddles: 2
+    Reference water depth : 0.80769231
+    Active absorption: 1
+Updating shallowWaterAbsorption wave model for patch outlet
+Selecting waveModel StokesI
+Wave model: patch inlet
+    Type : StokesI
+    Velocity field name : U
+    Phase fraction field name : alpha.water
+    Transformation from local to global system : (-1 -1.0565101e-32 1.6434602e-32 1.0565101e-32 -1 0 -0 -0 1)
+    Number of paddles: 2
+    Reference water depth : 0.80769231
+    Active absorption: 1
+    Ramp time : 2
+    Wave height : 0.02
+    Wave angle  : 0
+    Wave period : 2
+    Wave length : 4.8655404
+    Wave phase : 4.712389
+    Wave type: Intermediate
+Updating StokesI wave model for patch inlet
+Execution time for mesh.update() = 15.63 s
+smoothSolver:  Solving for alpha.water, Initial residual = 1.4472474e-13, Final residual = 7.2445929e-20, No Iterations 1
+Phase-1 volume fraction = 0.53969579  Min(alpha.water) = 0  Max(alpha.water) = 1
+MULES: Correcting alpha.water
+MULES: Correcting alpha.water
+Phase-1 volume fraction = 0.53969579  Min(alpha.water) = 0  Max(alpha.water) = 1
+Updating StokesI wave model for patch inlet
+smoothSolver:  Solving for alpha.water, Initial residual = 1.4472474e-13, Final residual = 7.2489564e-20, No Iterations 1
+Phase-1 volume fraction = 0.53969579  Min(alpha.water) = 0  Max(alpha.water) = 1
+MULES: Correcting alpha.water
+MULES: Correcting alpha.water
+Phase-1 volume fraction = 0.53969579  Min(alpha.water) = 0  Max(alpha.water) = 1
+Updating StokesI wave model for patch inlet
+velocityDampingConstraint damp damped 0 (0%) of cells, with max limit 12
+DICPBiCGStab:  Solving for p_rgh, Initial residual = 1, Final residual = 0.037735452, No Iterations 2
+time step continuity errors : sum local = 3.1828832e-12, global = 2.242838e-13, cumulative = 2.242838e-13
+DICPBiCGStab:  Solving for p_rgh, Initial residual = 0.010581194, Final residual = 1.7748216e+09, No Iterations 1000
+time step continuity errors : sum local = 0.31709462, global = -0.014194547, cumulative = -0.014194547
+PIMPLE: iteration 2
+smoothSolver:  Solving for alpha.water, Initial residual = 0.000713043, Final residual = 1.1886726e-13, No Iterations 43
+Phase-1 volume fraction = 0.53981926  Min(alpha.water) = 0  Max(alpha.water) = 1
+MULES: Correcting alpha.water
+MULES: Correcting alpha.water
+Phase-1 volume fraction = 0.53981924  Min(alpha.water) = -1584.2753  Max(alpha.water) = 1557.3136
+Updating StokesI wave model for patch inlet
+smoothSolver:  Solving for alpha.water, Initial residual = 0.98853248, Final residual = 9.1783713e-13, No Iterations 40
+Phase-1 volume fraction = 0.53981003  Min(alpha.water) = -8.9925976e-05  Max(alpha.water) = 1.3008913
+MULES: Correcting alpha.water
+MULES: Correcting alpha.water
+Phase-1 volume fraction = 0.53981005  Min(alpha.water) = -729.6521  Max(alpha.water) = 1781.3219
+Updating StokesI wave model for patch inlet
+velocityDampingConstraint damp damped 12418 (2.15%) of cells, with max limit 12
+DICPBiCGStab:  Solving for p_rgh, Initial residual = 1.1062583e-16, Final residual = 1.1062583e-16, No Iterations 0
+time step continuity errors : sum local = 0.25253037, global = -0.0019910338, cumulative = -0.016185581
+DICPBiCGStab:  Solving for p_rgh, Initial residual = 1.111623e-16, Final residual = 1.111623e-16, No Iterations 0
+time step continuity errors : sum local = 0.29008874, global = -0.0016884685, cumulative = -0.017874049
+smoothSolver:  Solving for epsilon, Initial residual = 0.89189002, Final residual = 0.0081150113, No Iterations 24
+smoothSolver:  Solving for k, Initial residual = 1, Final residual = 0.0082143193, No Iterations 21
+ExecutionTime = 25.21 s  ClockTime = 26 s
+
+fieldMinMax minMax1 write:
+    min(mag(U)) = 0 in cell 0 at location (-6.4418605 -1.6916667 -0.79230769) on processor 0
+    max(mag(U)) = 43590858 in cell 25160 at location (0.027702786 -0.22253159 0.0098591669) on processor 2
+    min(p) = -5.4726011e+26 in cell 115102 at location (0.12 0.023437689 -0.42292722) on processor 2
+    max(p) = 8409.7764 in cell 10 at location (0.069767442 -0.525 -0.85) on processor 2
+
+Courant Number mean: 14.544284 max: 72726.271
+Interface Courant Number mean: 2.1483028 max: 36363.136
+deltaT = 1.6500491e-10
+Time = 1.2000357e-05
+
+PIMPLE: iteration 1
+forces forces:
+    rho: rho
+    Not including porosity effects
+
+forces forces:
+    rho: rho
+    Not including porosity effects
+
+MoorDyn module saved at t = 1.2000192e-05 s
+ attachmentPt[0] (-0.37 0.12 -0.05) force (-0.05087708 0.064178277 -0.42292082) moment (-0.047541585 -0.15393685 -0.017640713)
+ attachmentPt[1] (-0.37 -0.12 -0.05) force (-0.05087708 -0.064178277 -0.42292082) moment (0.047541585 -0.15393685 0.017640713)
+ attachmentPt[2] (0.37 0.12 -0.05) force (0.72790362 0.55527825 -0.86630979) moment (-0.076193263 0.28413944 0.11810452)
+ attachmentPt[3] (0.37 -0.12 -0.05) force (0.72790362 -0.55527825 -0.86630979) moment (0.076193263 0.28413944 -0.11810452)
+ attachmentPt[4] (1.1194871e-11 0 -0.05) force (-3.6563456e-09 0 -9.8476591) moment (0 2.9306056e-10 0)
+ attachmentPt[5] (-9.8874737e-16 0 -0.1705) force (3.2219167e-13 0 9.8078071) moment (0 -4.5236236e-14 -0)
+forces forces:
+    rho: rho
+    Not including porosity effects
+
+forces forces:
+    rho: rho
+    Not including porosity effects
+
+MoorDyn module restored to t = 1.2000192e-05 s
+ attachmentPt[0] (-0.37000152 0.12 -0.049971909) force (3.0675886e+08 -2.2035432e+08 -1.0608132e+09) moment (-1.3830911e+08 -4.0783183e+08 44720368)
+ attachmentPt[1] (-0.37000152 -0.12 -0.049971909) force (3.0675886e+08 2.2035432e+08 -1.0608132e+09) moment (1.3830911e+08 -4.0783183e+08 -44720368)
+ attachmentPt[2] (0.36999848 0.12 -0.05002809) force (3.1830066e+09 2.0998778e+09 4.7460248e+09) moment (6.7457586e+08 -1.9152617e+09 3.949908e+08)
+ attachmentPt[3] (0.36999848 -0.12 -0.05002809) force (3.1830066e+09 -2.0998778e+09 4.7460248e+09) moment (-6.7457586e+08 -1.9152617e+09 -3.949908e+08)
+ attachmentPt[4] (-1.5184907e-06 0 -0.05) force (7812738.2 0 774.23296) moment (0 -390636.91 -0)
+ attachmentPt[5] (0.0047762893 0 -0.17054081) force (-6.6512067e+13 0 -2.021017e+13) moment (0 1.1439552e+13 0)
+forces forces:
+    rho: rho
+    Not including porosity effects
+
+forces forces:
+    rho: rho
+    Not including porosity effects
+
+MoorDyn module restored to t = 1.2000192e-05 s
+ attachmentPt[0] (-0.37000179 0.12 -0.049966853) force (4.2696235e+08 -3.0671915e+08 -1.4769714e+09) moment (-1.9256236e+08 -5.6781604e+08 62251152)
+ attachmentPt[1] (-0.37000179 -0.12 -0.049966853) force (4.2696235e+08 3.0671915e+08 -1.4769714e+09) moment (1.9256236e+08 -5.6781604e+08 -62251152)
+ attachmentPt[2] (0.36999821 0.12 -0.050033146) force (4.4324954e+09 2.9240533e+09 6.6096854e+09) moment (9.3946184e+08 -2.6673434e+09 5.4999502e+08)
+ attachmentPt[3] (0.36999821 -0.12 -0.050033146) force (4.4324954e+09 -2.9240533e+09 6.6096854e+09) moment (-9.3946184e+08 -2.6673434e+09 -5.4999502e+08)
+ attachmentPt[4] (-1.7918143e-06 0 -0.05) force (10878375 0 1279.1539) moment (0 -543918.77 -0)
+ attachmentPt[5] (0.0056154781 0 -0.17055663) force (-8.7221954e+13 0 -3.0842412e+13) moment (0 1.5049477e+13 0)
+Rigid-body motion of the vessel
+    Centre of rotation: (-1.0161978e-10 0 -0.03)
+    Orientation: (1 0 -9.2045417e-05 0 1 0 9.2045417e-05 0 1)
+    Linear velocity: (-1.3175859 0 0.22217069)
+    Angular velocity: (0 1115671.3 0)
+Rigid-body motion of the pendulum
+    Centre of rotation: (-9.7009036e-07 0 -0.45000034)
+    Orientation: (0.99978754 0 -0.02061247 0 1 0 0.02061247 0 0.99978754)
+    Linear velocity: (-11758.321 0 -4097.9848)
+    Angular velocity: (0 2.4985838e+08 0)
+
+ Number of layers : 6
+ Average volumetric ratio : 6(0.013845711 0.012923428 0.012878636 0.013511632 0.014249882 0.013020118)
+ Number of holes cells : 6(265791 260347 254934 251773 245840 230664)
+ Using layer : 3
+
+Overset analysis : nCells : 576815
+    calculated   : 94
+    interpolated : 46 (from local:46  mixed local/remote:0  remote:0)
+    hole         : 564383
+
+Updating shallowWaterAbsorption wave model for patch outlet
+Updating StokesI wave model for patch inlet
+Execution time for mesh.update() = 6.56 s
+Updating StokesI wave model for patch inlet
+smoothSolver:  Solving for alpha.water, Initial residual = 0.00051829173, Final residual = 3.959532e-14, No Iterations 6
+Phase-1 volume fraction = 0.53981193  Min(alpha.water) = -602.28424  Max(alpha.water) = 1461.2019
+MULES: Correcting alpha.water
+MULES: Correcting alpha.water
+Phase-1 volume fraction = 0.53980784  Min(alpha.water) = -595.43474  Max(alpha.water) = 1362.3962
+Updating StokesI wave model for patch inlet
+smoothSolver:  Solving for alpha.water, Initial residual = 0.00034326355, Final residual = 7.7529608e-13, No Iterations 5
+Phase-1 volume fraction = 0.53980986  Min(alpha.water) = -492.71942  Max(alpha.water) = 1119.2534
+MULES: Correcting alpha.water
+MULES: Correcting alpha.water
+Phase-1 volume fraction = 0.53980596  Min(alpha.water) = -488.27181  Max(alpha.water) = 1119.2521
+Updating StokesI wave model for patch inlet
+velocityDampingConstraint damp damped 12418 (2.15%) of cells, with max limit 12
+DICPBiCGStab:  Solving for p_rgh, Initial residual = 9.3513911e-05, Final residual = 4.6049886e-06, No Iterations 2
+time step continuity errors : sum local = 11.232082, global = 2.702155, cumulative = 2.684281
+DICPBiCGStab:  Solving for p_rgh, Initial residual = 5.1162641e-06, Final residual = 13525.785, No Iterations 1000
+time step continuity errors : sum local = 3.4506353e+09, global = 83573469, cumulative = 83573472
+PIMPLE: iteration 2
+Updating StokesI wave model for patch inlet
+smoothSolver:  Solving for alpha.water, Initial residual = 1, Final residual = 2.3053962e-13, No Iterations 57
+Phase-1 volume fraction = 0.53922569  Min(alpha.water) = -6.0912615e-09  Max(alpha.water) = 1.0347979
+MULES: Correcting alpha.water
+MULES: Correcting alpha.water
+Phase-1 volume fraction = -1.4953003e+16  Min(alpha.water) = -7.2387723e+31  Max(alpha.water) = 7.2848563e+31
+Updating StokesI wave model for patch inlet
+smoothSolver:  Solving for alpha.water, Initial residual = 1, Final residual = 3.7357015e-13, No Iterations 36
+Phase-1 volume fraction = -5.9026134e+14  Min(alpha.water) = -3.0572422e+21  Max(alpha.water) = 6.5981078e+16
+MULES: Correcting alpha.water
+MULES: Correcting alpha.water
+Phase-1 volume fraction = 3.8002566e+64  Min(alpha.water) = -1.8539539e+87  Max(alpha.water) = 3.1702223e+87
+Updating StokesI wave model for patch inlet
+velocityDampingConstraint damp damped 12432 (2.16%) of cells, with max limit 12
+DICPBiCGStab:  Solving for p_rgh, Initial residual = 0.99991934, Final residual = 0.049515181, No Iterations 11
+time step continuity errors : sum local = 4.649586e+27, global = -1.8483863e+25, cumulative = -1.8483863e+25
+DICPBiCGStab:  Solving for p_rgh, Initial residual = 4.5486237e-08, Final residual = 9.856964e-10, No Iterations 5
+time step continuity errors : sum local = 2.074183e+78, global = 2.0737337e+78, cumulative = 2.0737337e+78
+smoothSolver:  Solving for epsilon, Initial residual = 0.55978844, Final residual = 0.0033130285, No Iterations 3
+bounding epsilon, min: -0.00017381458 max: 1.9540524e+37 average: 1.6099337e+32
+smoothSolver:  Solving for k, Initial residual = 1, Final residual = 0.00073260659, No Iterations 1
+bounding k, min: -4.4059415e-06 max: 1.2935606e+79 average: 8.1637863e+73
+ExecutionTime = 40.03 s  ClockTime = 41 s
+
+fieldMinMax minMax1 write:
+    min(mag(U)) = 0 in cell 0 at location (-6.4418605 -1.6916667 -0.79230769) on processor 0
+    max(mag(U)) = 2.2064602e+68 in cell 21948 at location (-0.091221902 -0.035936574 -0.1026808) on processor 1
+    min(p) = -2.4217113e+119 in cell 24005 at location (-0.43306794 -0.23 0.26526027) on processor 0
+    max(p) = 1.0870073e+118 in cell 54703 at location (-0.41817896 -0.23 0.20855458) on processor 0
+
+Courant Number mean: 7.3468943e+53 max: 3.1255719e+60
+Interface Courant Number mean: 1.414625e+53 max: 1.9903747e+59
+deltaT = 5.2791911e-71
+Time = 1.2000357e-05
+
+PIMPLE: iteration 1
+forces forces:
+    rho: rho
+    Not including porosity effects
+
+forces forces:
+    rho: rho
+    Not including porosity effects
+
+MoorDyn module saved at t = 1.2000357e-05 s
+ attachmentPt[0] (-0.37000184 0.12 -0.049965943) force (4.510692e+08 -3.2409632e+08 -1.5592877e+09) moment (-2.033083e+08 -5.994774e+08 65787932)
+ attachmentPt[1] (-0.37000184 -0.12 -0.049965943) force (4.510692e+08 3.2409632e+08 -1.5592877e+09) moment (2.033083e+08 -5.994774e+08 -65787932)
+ attachmentPt[2] (0.36999816 0.12 -0.050034056) force (4.6782384e+09 3.0862521e+09 6.9734151e+09) moment (9.9122752e+08 -2.814222e+09 5.8051898e+08)
+ attachmentPt[3] (0.36999816 -0.12 -0.050034056) force (4.6782384e+09 -3.0862521e+09 6.9734151e+09) moment (-9.9122752e+08 -2.814222e+09 -5.8051898e+08)
+ attachmentPt[4] (-1.84101e-06 0 -0.05) force (11483921 0 688.15726) moment (0 -574196.02 -0)
+ attachmentPt[5] (0.0057602153 0 -0.17055972) force (-1.0576431e+14 0 -1.9705742e+13) moment (0 1.815264e+13 0)
+forces forces:
+    rho: rho
+    Not including porosity effects
+
+forces forces:
+    rho: rho
+    Not including porosity effects
+
+MoorDyn module restored to t = 1.2000357e-05 s
+ attachmentPt[0] (-0.37000184 0.12 -0.049965943) force (-1.1458153e+47 -4.8088954e+46 -2.7443124e+47) moment (-3.5334559e+46 -9.581489e+46 3.1542784e+46)
+ attachmentPt[1] (-0.37000184 -0.12 -0.049965943) force (-1.1458153e+47 4.8088954e+46 -2.7443124e+47) moment (3.5334559e+46 -9.581489e+46 -3.1542784e+46)
+ attachmentPt[2] (0.36999816 0.12 -0.050034056) force (-1.9830921e+46 1.3785484e+47 1.7044515e+47) moment (2.7350854e+46 -6.2072168e+46 5.3385746e+46)
+ attachmentPt[3] (0.36999816 -0.12 -0.050034056) force (-1.9830921e+46 -1.3785484e+47 1.7044515e+47) moment (-2.7350854e+46 -6.2072168e+46 -5.3385746e+46)
+ attachmentPt[4] (-1.84101e-06 0 -0.05) force (-4.9276683e+46 0 -4.2869164e+45) moment (0 2.4638262e+45 0)
+ attachmentPt[5] (0.0057602153 0 -0.17055972) force (-1.0576431e+14 0 -1.9705742e+13) moment (0 1.815264e+13 0)
+forces forces:
+    rho: rho
+    Not including porosity effects
+
+forces forces:
+    rho: rho
+    Not including porosity effects
+
+MoorDyn module restored to t = 1.2000357e-05 s
+ attachmentPt[0] (-0.37000184 0.12 -0.049965943) force (-1.5954332e+47 -6.6959059e+46 -3.8211806e+47) moment (-4.919984e+46 -1.3341265e+47 4.3920173e+46)
+ attachmentPt[1] (-0.37000184 -0.12 -0.049965943) force (-1.5954332e+47 6.6959059e+46 -3.8211806e+47) moment (4.919984e+46 -1.3341265e+47 -4.3920173e+46)
+ attachmentPt[2] (0.36999816 0.12 -0.050034056) force (-2.7612574e+46 1.9194907e+47 2.3732782e+47) moment (3.8083329e+46 -8.6429287e+46 7.4334313e+46)
+ attachmentPt[3] (0.36999816 -0.12 -0.050034056) force (-2.7612574e+46 -1.9194907e+47 2.3732782e+47) moment (-3.8083329e+46 -8.6429287e+46 -7.4334313e+46)
+ attachmentPt[4] (-1.84101e-06 0 -0.05) force (-6.8612853e+46 0 -5.9691024e+45) moment (0 3.4306316e+45 0)
+ attachmentPt[5] (0.0057602153 0 -0.17055972) force (-1.0576431e+14 0 -1.9705742e+13) moment (0 1.815264e+13 0)
+Rigid-body motion of the vessel
+    Centre of rotation: (-1.0161978e-10 0 -0.03)
+    Orientation: (1 0 -9.2045417e-05 0 1 0 9.2045417e-05 0 1)
+    Linear velocity: (2.0440038e+24 0 1.6677634e+24)
+    Angular velocity: (0 1.3594897e+25 0)
+Rigid-body motion of the pendulum
+    Centre of rotation: (-9.7009036e-07 0 -0.45000034)
+    Orientation: (0.99978754 0 -0.02061247 0 1 0 0.02061247 0 0.99978754)
+    Linear velocity: (-11758.321 0 -4097.9848)
+    Angular velocity: (0 2.4985838e+08 0)
+
+ Number of layers : 6
+ Average volumetric ratio : 6(0.013845711 0.012923428 0.012878636 0.013511632 0.014249882 0.013020118)
+ Number of holes cells : 6(265791 260347 254934 251773 245840 230664)
+ Using layer : 3
+
+Overset analysis : nCells : 576815
+    calculated   : 94
+    interpolated : 46 (from local:46  mixed local/remote:0  remote:0)
+    hole         : 564383
+
+Updating shallowWaterAbsorption wave model for patch outlet
+Updating StokesI wave model for patch inlet
+Execution time for mesh.update() = 6.47 s
+Updating StokesI wave model for patch inlet
+smoothSolver:  Solving for alpha.water, Initial residual = 4.4053476e-17, Final residual = 1.6930346e-18, No Iterations 1
+Phase-1 volume fraction = 6.2272831e+63  Min(alpha.water) = -1.8539539e+87  Max(alpha.water) = 3.1702223e+87
+[0] [stack trace]
+[0] =============
+[1] [stack trace]
+[1] =============
+[2] [stack trace]
+[2] =============
+[1] #1  [2] #1  Foam::sigFpe::sigHandler(int)[0] #1  Foam::sigFpe::sigHandler(int)Foam::sigFpe::sigHandler(int) in /usr/lib/openfoam/openfoam2306/platforms/linux64GccDPInt32Opt/lib/libOpenFOAM.so
+[2] #2  ? in /usr/lib/openfoam/openfoam2306/platforms/linux64GccDPInt32Opt/lib/libOpenFOAM.so
+[1] #2  ? in /usr/lib/openfoam/openfoam2306/platforms/linux64GccDPInt32Opt/lib/libOpenFOAM.so
+[0] #2  ? in /lib64/libpthread.so.0
+[2] #3   in /lib64/libpthread.so.0
+[0] #3   in /lib64/libpthread.so.0
+[1] #3  sh: which: command not found
+?
+[2] #4  sh: which: command not found
+?
+[0] #4  sh: which: command not found
+?
+[1] #4  sh: which: command not found
+?
+[2] #5  sh: which: command not found
+?
+[0] #5  sh: which: command not found
+?
+[2] #6  __libc_start_mainsh: which: command not found
+?
+[0] #6  __libc_start_mainsh: which: command not found
+?
+[1] #5   in /lib64/libc.so.6
+[2] #7  sh: which: command not found
+?
+[1] #6  __libc_start_main in /lib64/libc.so.6
+[0] #7  sh: which: command not found
+?
+[2] =============
+[srvcnthpc113:59305:0:59305] Caught signal 8 (Floating point exception: tkill(2) or tgkill(2))
+==== backtrace (tid:  59305) ====
+ 0  /lib64/libucs.so.0(ucs_handle_error+0x2dc) [0x7f418e1dfe4c]
+ 1  /lib64/libucs.so.0(+0x2c02c) [0x7f418e1e002c]
+ 2  /lib64/libucs.so.0(+0x2c2da) [0x7f418e1e02da]
+ 3  /lib64/libpthread.so.0(raise+0x10f) [0x7f41ade26b8f]
+ 4  overInterDyMFoam() [0x4ec6d1]
+ 5  overInterDyMFoam() [0x4edbb8]
+ 6  overInterDyMFoam() [0x44c6a9]
+ 7  /lib64/libc.so.6(__libc_start_main+0xe5) [0x7f41ada89d85]
+ 8  overInterDyMFoam() [0x4540ce]
+=================================
+[srvcnthpc113:59305] *** Process received signal ***
+[srvcnthpc113:59305] Signal: Floating point exception (8)
+[srvcnthpc113:59305] Signal code:  (-6)
+[srvcnthpc113:59305] Failing at address: 0x9a40000e7a9
+[srvcnthpc113:59305] [ 0] /lib64/libpthread.so.0(+0x12cf0)[0x7f41ade26cf0]
+[srvcnthpc113:59305] [ 1] /lib64/libpthread.so.0(raise+0x10f)[0x7f41ade26b8f]
+[srvcnthpc113:59305] [ 2] /lib64/libpthread.so.0(+0x12cf0)[0x7f41ade26cf0]
+[srvcnthpc113:59305] [ 3] overInterDyMFoam[0x4ec6d1]
+[srvcnthpc113:59305] [ 4] overInterDyMFoam[0x4edbb8]
+[srvcnthpc113:59305] [ 5] overInterDyMFoam[0x44c6a9]
+[srvcnthpc113:59305] [ 6] /lib64/libc.so.6(__libc_start_main+0xe5)[0x7f41ada89d85]
+[srvcnthpc113:59305] [ 7] overInterDyMFoam[0x4540ce]
+[srvcnthpc113:59305] *** End of error message ***
+sh: which: command not found
+?
+[0] =============
+[srvcnthpc113:59303:0:59303] Caught signal 8 (Floating point exception: tkill(2) or tgkill(2))
+==== backtrace (tid:  59303) ====
+ 0  /lib64/libucs.so.0(ucs_handle_error+0x2dc) [0x7ffb55ccee4c]
+ 1  /lib64/libucs.so.0(+0x2c02c) [0x7ffb55ccf02c]
+ 2  /lib64/libucs.so.0(+0x2c2da) [0x7ffb55ccf2da]
+ 3  /lib64/libpthread.so.0(raise+0x10f) [0x7ffb759b4b8f]
+ 4  overInterDyMFoam() [0x4ec738]
+ 5  overInterDyMFoam() [0x4edbb8]
+ 6  overInterDyMFoam() [0x44c6a9]
+ 7  /lib64/libc.so.6(__libc_start_main+0xe5) [0x7ffb75617d85]
+ 8  overInterDyMFoam() [0x4540ce]
+=================================
+[srvcnthpc113:59303] *** Process received signal ***
+[srvcnthpc113:59303] Signal: Floating point exception (8)
+[srvcnthpc113:59303] Signal code:  (-6)
+[srvcnthpc113:59303] Failing at address: 0x9a40000e7a7
+[srvcnthpc113:59303] [ 0] /lib64/libpthread.so.0(+0x12cf0)[0x7ffb759b4cf0]
+[srvcnthpc113:59303] [ 1] /lib64/libpthread.so.0(raise+0x10f)[0x7ffb759b4b8f]
+[srvcnthpc113:59303] [ 2] /lib64/libpthread.so.0(+0x12cf0)[0x7ffb759b4cf0]
+[srvcnthpc113:59303] [ 3] overInterDyMFoam[0x4ec738]
+[srvcnthpc113:59303] [ 4] overInterDyMFoam[0x4edbb8]
+[srvcnthpc113:59303] [ 5] overInterDyMFoam[0x44c6a9]
+[srvcnthpc113:59303] [ 6] /lib64/libc.so.6(__libc_start_main+0xe5)[0x7ffb75617d85]
+[srvcnthpc113:59303] [ 7] overInterDyMFoam[0x4540ce]
+[srvcnthpc113:59303] *** End of error message ***
+ in /lib64/libc.so.6
+[1] #7  sh: which: command not found
+?
+[1] =============
+[srvcnthpc113:59304:0:59304] Caught signal 8 (Floating point exception: tkill(2) or tgkill(2))
+==== backtrace (tid:  59304) ====
+ 0  /lib64/libucs.so.0(ucs_handle_error+0x2dc) [0x7fe8998c4e4c]
+ 1  /lib64/libucs.so.0(+0x2c02c) [0x7fe8998c502c]
+ 2  /lib64/libucs.so.0(+0x2c2da) [0x7fe8998c52da]
+ 3  /lib64/libpthread.so.0(raise+0x10f) [0x7fe8b95dab8f]
+ 4  overInterDyMFoam() [0x4ec6d1]
+ 5  overInterDyMFoam() [0x4edbb8]
+ 6  overInterDyMFoam() [0x44c6a9]
+ 7  /lib64/libc.so.6(__libc_start_main+0xe5) [0x7fe8b923dd85]
+ 8  overInterDyMFoam() [0x4540ce]
+=================================
+[srvcnthpc113:59304] *** Process received signal ***
+[srvcnthpc113:59304] Signal: Floating point exception (8)
+[srvcnthpc113:59304] Signal code:  (-6)
+[srvcnthpc113:59304] Failing at address: 0x9a40000e7a8
+[srvcnthpc113:59304] [ 0] /lib64/libpthread.so.0(+0x12cf0)[0x7fe8b95dacf0]
+[srvcnthpc113:59304] [ 1] /lib64/libpthread.so.0(raise+0x10f)[0x7fe8b95dab8f]
+[srvcnthpc113:59304] [ 2] /lib64/libpthread.so.0(+0x12cf0)[0x7fe8b95dacf0]
+[srvcnthpc113:59304] [ 3] overInterDyMFoam[0x4ec6d1]
+[srvcnthpc113:59304] [ 4] overInterDyMFoam[0x4edbb8]
+[srvcnthpc113:59304] [ 5] overInterDyMFoam[0x44c6a9]
+[srvcnthpc113:59304] [ 6] /lib64/libc.so.6(__libc_start_main+0xe5)[0x7fe8b923dd85]
+[srvcnthpc113:59304] [ 7] overInterDyMFoam[0x4540ce]
+[srvcnthpc113:59304] *** End of error message ***
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun noticed that process rank 2 with PID 59305 on node srvcnthpc113 exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------

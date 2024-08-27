@@ -1,0 +1,71 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2306                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       pointVectorField;
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 1 0 0 0 0 0];
+
+internalField   uniform (0 0 0);  // Adjust this if there's an initial flow
+
+boundaryField
+{
+    #includeEtc "caseDicts/setConstraintTypes"
+
+    "(overset-1|oversetPatch)"
+    {
+        patchType       overset;
+        type            zeroGradient;
+    }
+
+    vessel
+    {
+        type            calculated;  // Vessel's motion determined by fluid forces
+        value           uniform (0 0 0);  // Adjust if the vessel starts with an initial velocity
+    }
+
+    pendulum
+    {
+        type            calculated;  // Same for the pendulum
+        value           uniform (0 0 0);  // Adjust if there's an initial velocity
+    }
+
+    bottom
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);  // Static boundary at the bottom
+    }
+
+    inlet
+    {
+        type            fixedValue;
+        value           uniform (1 0 0);  // Example of an inlet with a flow in the x-direction
+    }
+
+    outlet
+    {
+        type            zeroGradient;  // Allows fluid to flow out freely
+    }
+
+    atmosphere
+    {
+        type            pressureInletOutletVelocity;
+        value           uniform (0 0 0);  // Adjust based on expected atmospheric conditions
+    }
+
+    frontAndBack
+    {
+        type            slip;  // Slip condition for front and back if symmetry is expected
+    }
+}
+// ************************************************************************* //
